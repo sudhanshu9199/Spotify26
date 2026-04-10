@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../config/config.js";
+import { publishToQueue } from "../broker/rabbit.js";
 
 export async function register(req, res) {
   const { email, fullname, password } = req.body;
@@ -33,6 +34,13 @@ export async function register(req, res) {
     config.JWT_SECRET,
     { expiresIn: "2d" },
   );
+
+  await publishToQueue("user_created", {
+    id: newUser._id,
+    email: newUser.email,
+    fullname: newUser.fullname,
+    role: newUser.role,
+  });
 
   res.cookie("token", token, {
     httpOnly: true,
