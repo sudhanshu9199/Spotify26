@@ -1,0 +1,167 @@
+@use "../styles/theme";
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--space-4);
+  background-color: var(--color-background-base);
+}
+
+.login-card {
+  background-color: var(--color-background-elevated);
+  padding: var(--space-12) var(--space-8);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 440px; /* Slightly narrower than register for a crisp look */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* Responsive padding */
+  @media (max-width: theme.$bp-tablet) {
+    padding: var(--space-8) var(--space-6);
+  }
+  @media (max-width: theme.$bp-mobile) {
+    padding: var(--space-6) var(--space-4);
+    box-shadow: none; /* Flatter look on small screens */
+    background-color: transparent; /* Full screen feel on mobile */
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+
+    h1 {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+      letter-spacing: -0.04em;
+    }
+    p {
+      color: var(--color-text-subdued);
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+
+      label {
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-bold);
+      }
+
+      input {
+        background-color: transparent;
+        color: var(--color-text-base);
+        border: 1px solid var(--color-text-subdued);
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        font-size: var(--font-size-base);
+        transition: border var(--transition-base);
+
+        &:hover {
+          border-color: var(--color-text-base);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: var(--color-primary);
+          box-shadow: 0 0 0 1px var(--color-primary);
+        }
+        
+        &::placeholder {
+          color: var(--color-text-subdued);
+        }
+      }
+    }
+
+    .btn-submit {
+      margin-top: var(--space-4);
+      background-color: var(--color-primary);
+      color: #000000;
+      font-weight: var(--font-weight-bold);
+      padding: var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-base);
+      transition: background-color var(--transition-base), transform 0.1s ease;
+
+      &:hover {
+        background-color: var(--color-primary-hover);
+        transform: scale(1.02);
+      }
+      
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: var(--space-6) 0;
+    
+    &::before, &::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--color-background-highlight);
+    }
+    
+    span {
+      padding: 0 var(--space-4);
+      color: var(--color-text-subdued);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--color-text-subdued);
+    color: var(--color-text-base);
+    padding: var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    transition: border-color var(--transition-base);
+
+    &:hover {
+      border-color: var(--color-text-base);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .register-prompt {
+    margin-top: var(--space-8);
+    text-align: center;
+    font-size: var(--font-size-base);
+    color: var(--color-text-subdued);
+    
+    a {
+      color: var(--color-text-base);
+      text-decoration: underline;
+      margin-left: var(--space-2);
+      
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}

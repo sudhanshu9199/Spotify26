@@ -7,6 +7,10 @@ export async function connect() {
   connection = await amqp.connect(config.RABBITMQ_URI);
   channel = await connection.createChannel();
 
+  connection.on("error", (err) => {
+    console.error("RabbitMQ connection error:", err);
+  });
+
   console.log("Connected to RabbitMQ");
 }
 

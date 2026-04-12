@@ -18,4 +18,12 @@ const registerUserValidationRules = [
   validate,
 ];
 
-export { validate, registerUserValidationRules };
+const loginUserValidationRules = [
+  body("email").isEmail().withMessage("Invalid email address"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
+  validate,
+];
+
+export { validate, registerUserValidationRules, loginUserValidationRules };
