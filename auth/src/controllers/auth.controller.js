@@ -97,6 +97,13 @@ export async function googleAuthCallback(req, res) {
     },
   });
 
+  await publishToQueue("user_created", {
+    id: newUser._id,
+    email: newUser.email,
+    fullname: newUser.fullname,
+    role: newUser.role,
+  });
+
   const token = jwt.sign(
     {
       id: newUser._id,

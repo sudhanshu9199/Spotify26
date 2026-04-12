@@ -12,6 +12,7 @@ function startListener() {
         <h1>Welcome to Spotify</h1>
         <p>Hi ${firstName} ${lastName},</p>
         <p>Your account has been created successfully.</p>
+        <p>Role: ${role}</p>
         <p>Thank you for joining Spotify!</p>
         `;
 
