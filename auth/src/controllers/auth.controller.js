@@ -5,7 +5,7 @@ import config from "../config/config.js";
 import { publishToQueue } from "../broker/rabbit.js";
 
 export async function register(req, res) {
-  const { email, fullname, password } = req.body;
+  const { email, fullname, password, role = "user" } = req.body;
 
   const isUserAlreadyExists = await userModel.findOne({ email });
 
@@ -24,12 +24,14 @@ export async function register(req, res) {
       firstName: fullname.firstName,
       lastName: fullname.lastName,
     },
+    role,
   });
 
   const token = jwt.sign(
     {
       id: newUser._id,
       role: newUser.role,
+      fullname: newUser.fullname,
     },
     config.JWT_SECRET,
     { expiresIn: "2d" },
@@ -72,6 +74,7 @@ export async function googleAuthCallback(req, res) {
       {
         id: isUserAlreadyExists._id,
         role: isUserAlreadyExists.role,
+        fullname: isUserAlreadyExists.fullname,
       },
       config.JWT_SECRET,
       { expiresIn: "2d" },
@@ -100,6 +103,7 @@ export async function googleAuthCallback(req, res) {
     {
       id: newUser._id,
       role: newUser.role,
+      fullname: newUser.fullname,
     },
     config.JWT_SECRET,
     { expiresIn: "2d" },
@@ -129,6 +133,7 @@ export async function login(req, res) {
     {
       id: user._id,
       role: user.role,
+      fullname: user.fullname,
     },
     config.JWT_SECRET,
     { expiresIn: "2d" },
