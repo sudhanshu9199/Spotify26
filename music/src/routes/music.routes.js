@@ -23,6 +23,18 @@ router.post(
 );
 
 router.get(
+  "/",
+  authMiddleware.authUserMiddleware,
+  musicController.getAllMusics,
+);
+
+router.get(
+  "/get-details/:id",
+  authMiddleware.authUserMiddleware,
+  musicController.getMusicById,
+);
+
+router.get(
   "/artist-musics",
   authMiddleware.authArtistMiddleware,
   musicController.getArtistMusics,
@@ -33,4 +45,18 @@ router.post(
   authMiddleware.authArtistMiddleware,
   musicController.createPlaylist,
 );
+
+router.get(
+  "/playlist",
+  authMiddleware.authUserMiddleware,
+  musicController.getPlaylists,
+);
+
+router.get(
+  "/playlist/:id",
+  authMiddleware.authUserMiddleware,
+  musicController.getPlaylistById,
+);
 export default router;
+
+// error : UIDIA server seems to have an issue.
