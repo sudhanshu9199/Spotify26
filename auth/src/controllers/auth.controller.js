@@ -80,6 +80,11 @@ export async function googleAuthCallback(req, res) {
       { expiresIn: "2d" },
     );
     res.cookie("token", token);
+
+    if (isUserAlreadyExists.role === "artist") {
+      return res.redirect("http://localhost:5173/artist/dashboard");
+    }
+
     return res.redirect("http://localhost:5173");
   }
 

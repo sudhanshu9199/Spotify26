@@ -156,3 +156,13 @@ export async function getPlaylistById(req, res) {
     res.status(500).json({ message: "Failed to get playlist by id" });
   }
 }
+
+export async function getArtistPlaylists(req, res) {
+  try {
+    const playlist = await playlistModel.find({ artistId: req.user.id });
+    return res.status(200).json({ playlist });
+  } catch (err) {
+    console.error("Error getting artist playlists:", err);
+    res.status(500).json({ message: "Failed to get artist playlists" });
+  }
+}
