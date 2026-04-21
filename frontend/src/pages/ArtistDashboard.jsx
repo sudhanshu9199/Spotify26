@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ArtistDashboard.scss";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function ArtistDashboard() {
   // Dummy data for visual representation until API is wired up
@@ -94,7 +95,9 @@ export default function ArtistDashboard() {
           <h1>Artist Dashboard</h1>
           <p>Welcome back! Here's an overview of your music and playlists.</p>
         </div>
-        <button className="btn-create">+ Upload New</button>
+        <Link to="/artist/dashboard/upload-music" className="btn-create" style={{ display: 'inline-block', textDecoration: 'none' }}>
+          + Upload New
+        </Link>
       </header>
 
       <div className="dashboard-grid">

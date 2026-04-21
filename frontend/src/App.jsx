@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ArtistDashboard from './pages/ArtistDashboard';
+import UploadMusic from './pages/UploadMusic';
+import MusicPlayer from './pages/MusicPlayer';
 
 
 const router = createBrowserRouter([
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
   {
     path: "/artist/dashboard",
     element: <ArtistDashboard />,
+  },
+  {
+    path: "/artist/dashboard/upload-music",
+    element: <UploadMusic />,
+  },
+  {
+    path: "/music/:id",
+    element: <MusicPlayer />,
   },
 ]);
 

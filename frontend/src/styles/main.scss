@@ -1,11 +1,14 @@
-@use 'theme';
+@use "theme";
 
 // CSS Reset / Global Styles
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: var(--font-family-base);
@@ -27,6 +30,12 @@ button {
   cursor: pointer;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
