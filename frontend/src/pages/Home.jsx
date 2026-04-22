@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.scss";
 
-export default function Home() {
+export default function Home({ socket }) {
   const navigate = useNavigate();
   const [musics, setMusics] = useState([
     {
@@ -51,9 +51,6 @@ export default function Home() {
   ]);
 
   useEffect(() => {
-    // These calls are ready to grab data from the backend when needed.
-    // Uncomment these when your get-all endpoints are fully tested.
-
     axios
       .get("http://localhost:3002/api/music", { withCredentials: true })
       .then((res) => {
@@ -92,7 +89,10 @@ export default function Home() {
           <h2>Featured Playlists</h2>
           <div className="media-grid">
             {playlists.map((playlist, index) => (
-              <div key={playlist._id || playlist.id || index} className="media-card">
+              <div
+                key={playlist._id || playlist.id || index}
+                className="media-card"
+              >
                 <div className="card-image-wrapper">
                   <div className="placeholder-icon">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -124,7 +124,10 @@ export default function Home() {
           <div className="media-grid">
             {musics.map((music, index) => (
               <div
-                onClick={() => navigate(`/music/${music._id || music.id}`)}
+                onClick={() => {
+                  socket.emit("play", { musicId: music._id });
+                  navigate(`/music/${music._id || music.id}`);
+                }}
                 key={music._id || music.id || index}
                 className="media-card"
               >

@@ -22,13 +22,15 @@ export async function uploadFile(file) {
 }
 
 export async function getPresignedUrl(key) {
+  if (!key) return null;
+
   const { data, error } = await supabase.storage
     .from(config.SUPABASE_BUCKET_NAME)
     .createSignedUrl(key, 3600);
 
   if (error) {
     console.error("Supabase Signed URL Error:", error.message);
-    throw new Error("Failed to get signed URL");
+    return null;
   }
 
   return data.signedUrl;
